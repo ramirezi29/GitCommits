@@ -15,6 +15,9 @@
 		1BBF68A3265065BC002172DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BBF68A1265065BC002172DF /* LaunchScreen.storyboard */; };
 		1BBF68AE265065BC002172DF /* GitCommitsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBF68AD265065BC002172DF /* GitCommitsTests.swift */; };
 		1BBF68B9265065BC002172DF /* GitCommitsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBF68B8265065BC002172DF /* GitCommitsUITests.swift */; };
+		1BBF68CD2650AB1A002172DF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBF68CC2650AB1A002172DF /* NetworkManager.swift */; };
+		1BBF68CF2650B68E002172DF /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBF68CE2650B68E002172DF /* NetworkError.swift */; };
+		1BBF68D12650CDC1002172DF /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBF68D02650CDC1002172DF /* Repo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		1BBF68B4265065BC002172DF /* GitCommitsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GitCommitsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BBF68B8265065BC002172DF /* GitCommitsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitCommitsUITests.swift; sourceTree = "<group>"; };
 		1BBF68BA265065BC002172DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1BBF68CC2650AB1A002172DF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		1BBF68CE2650B68E002172DF /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		1BBF68D02650CDC1002172DF /* Repo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +105,7 @@
 		1BBF6895265065BB002172DF /* GitCommits */ = {
 			isa = PBXGroup;
 			children = (
+				1BBF68CB2650AB0D002172DF /* Managers */,
 				1BBF68CA26506F0D002172DF /* Resources */,
 				1BBF68C926506F08002172DF /* Utilities */,
 				1BBF68C826506EF3002172DF /* Controller */,
@@ -136,6 +143,7 @@
 		1BBF68C626506EE7002172DF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1BBF68D02650CDC1002172DF /* Repo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -157,6 +165,7 @@
 		1BBF68C926506F08002172DF /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				1BBF68CE2650B68E002172DF /* NetworkError.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -166,6 +175,14 @@
 			children = (
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		1BBF68CB2650AB0D002172DF /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				1BBF68CC2650AB1A002172DF /* NetworkManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -298,9 +315,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BBF68CD2650AB1A002172DF /* NetworkManager.swift in Sources */,
 				1BBF689B265065BB002172DF /* ViewController.swift in Sources */,
+				1BBF68D12650CDC1002172DF /* Repo.swift in Sources */,
 				1BBF6897265065BB002172DF /* AppDelegate.swift in Sources */,
 				1BBF6899265065BB002172DF /* SceneDelegate.swift in Sources */,
+				1BBF68CF2650B68E002172DF /* NetworkError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
