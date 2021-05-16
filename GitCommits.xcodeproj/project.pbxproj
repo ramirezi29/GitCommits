@@ -19,6 +19,8 @@
 		1BBF68D12650CDC1002172DF /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBF68D02650CDC1002172DF /* Repo.swift */; };
 		1BBF68D726510AA8002172DF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBF68D626510AA8002172DF /* Constants.swift */; };
 		1BBF68D926510B15002172DF /* RepoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBF68D826510B15002172DF /* RepoVC.swift */; };
+		1BE070A52651AB1300CCA584 /* RepoDetailTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE070A42651AB1300CCA584 /* RepoDetailTVC.swift */; };
+		1BE070A72651B22E00CCA584 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE070A62651B22E00CCA584 /* extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		1BBF68D02650CDC1002172DF /* Repo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repo.swift; sourceTree = "<group>"; };
 		1BBF68D626510AA8002172DF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1BBF68D826510B15002172DF /* RepoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoVC.swift; sourceTree = "<group>"; };
+		1BE070A42651AB1300CCA584 /* RepoDetailTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoDetailTVC.swift; sourceTree = "<group>"; };
+		1BE070A62651B22E00CCA584 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				1BBF68D826510B15002172DF /* RepoVC.swift */,
+				1BE070A42651AB1300CCA584 /* RepoDetailTVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -167,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				1BBF68CE2650B68E002172DF /* NetworkError.swift */,
+				1BE070A62651B22E00CCA584 /* extensions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -322,6 +328,8 @@
 				1BBF68D12650CDC1002172DF /* Repo.swift in Sources */,
 				1BBF6897265065BB002172DF /* AppDelegate.swift in Sources */,
 				1BBF68D726510AA8002172DF /* Constants.swift in Sources */,
+				1BE070A52651AB1300CCA584 /* RepoDetailTVC.swift in Sources */,
+				1BE070A72651B22E00CCA584 /* extensions.swift in Sources */,
 				1BBF6899265065BB002172DF /* SceneDelegate.swift in Sources */,
 				1BBF68D926510B15002172DF /* RepoVC.swift in Sources */,
 				1BBF68CF2650B68E002172DF /* NetworkError.swift in Sources */,

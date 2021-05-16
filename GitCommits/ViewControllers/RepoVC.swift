@@ -19,7 +19,8 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        avatarImage.image = UIImage(named: "github")
+        
+        
         
         NetworkManager.shared.fetchRepos(for: "ramirezi29") { result in
             switch(result) {
@@ -37,6 +38,21 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
             }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        makeRounded()
+    }
+    
+    func makeRounded() {
+
+        avatarImage.layer.borderWidth = 1
+        avatarImage.layer.masksToBounds = false
+        
+        avatarImage.layer.cornerRadius = avatarImage.frame.height/2 //This will change with corners of image and height/2 will make this circle shape
+        avatarImage.clipsToBounds = true
+   }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         repos.count
@@ -65,14 +81,22 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 
-    /*
+    
+    
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == Constants.detailRepo {
+            
+            guard let destinationVC = segue.destination as? RepoDetailTVC,
+                  let indexPath = tableView.indexPathForSelectedRow else {
+                return
+            }
+
+            let repo = repos[indexPath.row]
+            
+            destinationVC.repo = repo
+        }
     }
-    */
+    
 
 }

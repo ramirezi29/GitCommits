@@ -10,4 +10,5 @@ import Foundation
 struct Constants {
     
     static let repoCell = "repoCell"
+    static let detailRepo = "toDetailRepo"
 }
