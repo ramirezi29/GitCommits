@@ -7,6 +7,24 @@
 
 import Foundation
 
-struct Repo: Codable {
+struct Repo: Decodable {
     let name: String
+    let owner: Owner
+    
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case owner
+    }
+
 }
+
+struct Owner: Decodable {
+    let avatarURL: URL?
+    
+    enum CodingKeys: String, CodingKey {
+        case avatarURL = "avatar_url"
+}
+}
+
+

@@ -14,14 +14,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        NetworkManager.shared.fetchRepos(for: "ramirezi29") { (result) in
-            switch result {
-            case .success( let repos):
-                print(repos)
-            case .failure(let error):
-                print("Error with the fetch\n\(error.localizedDescription)")
-            }
-        }
+//        NetworkManager.shared.fetchRepos(for: "ramirezi29") { (result) in
+//            switch result {
+//            case .success( let repos):
+//                print(repos)
+//            case .failure(let error):
+//                print("Error with the fetch\n\(error.localizedDescription)")
+//            }
+//        }
         
         // Override point for customization after application launch.
         return true

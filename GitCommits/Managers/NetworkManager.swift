@@ -5,7 +5,7 @@
 //  Created by Ivan Ramirez on 5/15/21.
 //
 
-import Foundation
+import UIKit
 
 class NetworkManager {
     
@@ -16,7 +16,7 @@ class NetworkManager {
      Get the user based on their GitHub user name
      
      ## Important Note ##
-     .
+     The user name needs to be valid
      */
     func fetchRepos(for username: String, completion: @escaping (Result<[Repo], NetworkingError>) -> Void) {
         
@@ -75,5 +75,36 @@ class NetworkManager {
             
         }.resume()
     }
+    
+    /**
+     Get the user's avatar image'
+     
+     ## Important Note ##
+     The user name needs to be valid
+     */
+    func fetchAvatar(from repo: Repo, completion: @escaping (Result<UIImage?, NetworkingError>) -> Void) {
+        
+        guard let url = repo.owner.avatarURL else {
+            return(completion(.failure(.badBuiltURL("Check the URL"))))
+           
+        }
+        
+        URLSession.shared.dataTask(with: url) { (data, _, error) in
+            if let error = error {
+                completion(.failure(.forwardedError(error)))
+            return
+            }
+            
+            guard let data = data else {
+                completion(.failure(.invalidData("The data was invalid")))
+                return
+            }
+            
+            let image = UIImage(data: data)
+            completion(.success(image))
+        }.resume()
+    }
+    
 }
     
+
