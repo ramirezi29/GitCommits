@@ -18,16 +18,17 @@ class NetworkManager {
      ## Important Note ##
      The user name needs to be valid
      */
-    func fetchRepos(for username: String, completion: @escaping (Result<[Repo], NetworkingError>) -> Void) {
+    func fetchRepos(for user: String, completion: @escaping (Result<[Repo], NetworkingError>) -> Void) {
         
         guard var url = URL(string:baseURL) else {
             completion(.failure(.badBaseURL("Base URL is not valid")))
+            
             return
         }
         // https://api.github.com/repos/ramirezi29/cardsofoppurtunity/commits
         // https://api.github.com/users/ramirezi29/repos
         url.appendPathComponent("users")
-        url.appendPathComponent("\(username)")
+        url.appendPathComponent(user)
         url.appendPathComponent("repos")
         let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
         
@@ -144,9 +145,52 @@ class NetworkManager {
             
             do {
                 let repoCommit = try decoder.decode([RepoCommit].self, from: data)
-               
+                
                 completion(.success(repoCommit))
             } catch {
+                completion(.failure(.forwardedError(error)))
+            }
+        }.resume()
+    }
+    
+    func fetchDetails(of user: String, completion: @escaping (Result<User, NetworkingError>) -> Void) {
+        
+        guard var url = URL(string: baseURL) else {
+            completion(.failure(.badBaseURL("Base URL is not valid")))
+            return
+        }
+        url.appendPathComponent("users")
+        url.appendPathComponent(user)
+        
+        let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
+        
+        guard let builtURL = components?.url else {
+            completion(.failure(.badBuiltURL("Complete URL is not valid")))
+            print("Error with built URL")
+            return
+        }
+        print("\n❤️\(builtURL.absoluteURL)\n")
+        URLSession.shared.dataTask(with: builtURL) { (data, _, error) in
+            
+            if let error = error {
+                completion(.failure(NetworkingError.forwardedError(error)))
+                print(error.localizedDescription)
+                return
+            }
+            guard let data = data else {
+                completion(.failure(.invalidData("Invalid Data")))
+                print(error?.localizedDescription as Any)
+                
+                return
+            }
+            
+            let decoder = JSONDecoder()
+            
+            do {
+                let user = try decoder.decode(User.self, from: data)
+                completion(.success(user))
+            } catch {
+                print(error.localizedDescription)
                 completion(.failure(.forwardedError(error)))
             }
         }.resume()

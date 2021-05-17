@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B6ECD4826523310001FF11E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6ECD4726523310001FF11E /* User.swift */; };
+		1B6ECD4A26523BE8001FF11E /* RepoPopOverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6ECD4926523BE8001FF11E /* RepoPopOverVC.swift */; };
 		1BBF6897265065BB002172DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBF6896265065BB002172DF /* AppDelegate.swift */; };
 		1BBF6899265065BB002172DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBF6898265065BB002172DF /* SceneDelegate.swift */; };
 		1BBF689E265065BB002172DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BBF689C265065BB002172DF /* Main.storyboard */; };
@@ -42,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B6ECD4726523310001FF11E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		1B6ECD4926523BE8001FF11E /* RepoPopOverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoPopOverVC.swift; sourceTree = "<group>"; };
 		1BBF6893265065BB002172DF /* GitCommits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitCommits.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BBF6896265065BB002172DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BBF6898265065BB002172DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -149,6 +153,7 @@
 			children = (
 				1BBF68D02650CDC1002172DF /* Repo.swift */,
 				1BE070A82651D52500CCA584 /* Commit.swift */,
+				1B6ECD4726523310001FF11E /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -167,6 +172,7 @@
 			children = (
 				1BBF68D826510B15002172DF /* RepoVC.swift */,
 				1BE070A42651AB1300CCA584 /* RepoDetailTVC.swift */,
+				1B6ECD4926523BE8001FF11E /* RepoPopOverVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -335,8 +341,10 @@
 				1BE070A52651AB1300CCA584 /* RepoDetailTVC.swift in Sources */,
 				1BE070A72651B22E00CCA584 /* extensions.swift in Sources */,
 				1BBF6899265065BB002172DF /* SceneDelegate.swift in Sources */,
+				1B6ECD4A26523BE8001FF11E /* RepoPopOverVC.swift in Sources */,
 				1BBF68D926510B15002172DF /* RepoVC.swift in Sources */,
 				1BBF68CF2650B68E002172DF /* NetworkError.swift in Sources */,
+				1B6ECD4826523310001FF11E /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

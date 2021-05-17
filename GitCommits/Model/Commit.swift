@@ -13,7 +13,7 @@ import UIKit
 
 struct RepoCommit: Decodable {
     let commit: Commit
-    
+    let sha: String
 }
 
 struct Commit: Decodable {
