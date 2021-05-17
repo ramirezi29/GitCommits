@@ -74,7 +74,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="detailRepo" id="u8A-Pq-xiB">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="detailRepoCell" id="u8A-Pq-xiB">
                                 <rect key="frame" x="0.0" y="24.5" width="375" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="u8A-Pq-xiB" id="knU-B2-eWG">
@@ -88,7 +88,7 @@
                             <outlet property="delegate" destination="2nL-xb-z7q" id="6Gg-xz-eCB"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="NV3-GZ-s5A"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="NV3-GZ-s5A"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cIl-W4-Btn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -10,40 +10,68 @@ import UIKit
 class RepoDetailTVC: UITableViewController {
 
     var repo: Repo?
+    var commits: [RepoCommit] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self
+        tableView.dataSource = self
         
-        title = repo?.name ?? "ivan No Repo Name"
+        
+        guard let repo = repo else { return }
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        NetworkManager.shared.getRepoDetails(for: repo.owner.login, repoName: repo.name) { result in
+            switch result {
+            case (.failure(let error)):
+                print(error.localizedDescription)
+            case (.success(let commits)):
+                print(commits.first?.commit.message ?? "\nIvan a message could not be found\n")
+                print(commits.count)
+                self.commits = commits
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        }
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        // #warning Incomplete implementation, return the number of sections
+//        return
+//    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        
+    
+        return commits.count
     }
 
-    /*
+   
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "detailRepoCell", for: indexPath)
 
-        // Configure the cell...
-
+        let index = commits[indexPath.row]
+        
+        print(("\(index.commit.author.date)"))
+        
+        
+        cell.textLabel?.text = ("\(index.commit.author.date)")
+        cell.detailTextLabel?.text = index.commit.author.name
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -90,4 +118,11 @@ class RepoDetailTVC: UITableViewController {
     }
     */
 
+}
+extension Date {
+    func convertToMonthYearFormat() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM yyyy"
+        return dateFormatter.string(from: self)
+    }
 }
