@@ -9,9 +9,10 @@ import Foundation
 
 struct Constants {
     
+    static let toRepoVC = "toRepoVC"
     static let repoCell = "repoCell"
-    static let detailRepo = "toDetailRepo"
+    static let detailRepo = "toDetailRepoVC"
     static let detailRepoCell = "detailRepoCell"
-    static let toRepoInfo = "toRepoInfo"
+    static let toRepoInfo = "toRepoInfoVC"
     
 }

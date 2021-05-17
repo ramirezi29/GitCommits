@@ -18,7 +18,11 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var followersLabel: UILabel!
     
+    
+    var name: String?
+    
     var repos: [Repo] = []
+    
     var user: User?
     
     override func viewDidLoad() {
@@ -26,24 +30,31 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         tableView.delegate = self
         tableView.dataSource = self
         navigationController?.navigationBar.prefersLargeTitles = true
-        fetchRepos()
-        fetchUser()
+        fetchUser(name: name ?? "")
+        fetchRepos(name: name ?? "")
+        
+        navigationController?.navigationBar.isTranslucent = true
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+          navigationController?.navigationBar.shadowImage = UIImage()
+          navigationController?.navigationBar.isTranslucent = true
+        updateBio()
         makeRounded()
-        
     }
     
-    func makeRounded() {
-        
-        avatarImage.layer.borderWidth = 1
-        avatarImage.layer.masksToBounds = false
-        
-        avatarImage.layer.cornerRadius = avatarImage.frame.height/2 //This will change with corners of image and height/2 will make this circle shape
-        avatarImage.clipsToBounds = true
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        // Restore the navigation bar to default
+        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        navigationController?.navigationBar.shadowImage = nil
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -52,10 +63,7 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.repoCell, for: indexPath)
-        
-        
         let repo = repos[indexPath.row]
-        
         cell.textLabel?.text = repo.name
         
         NetworkManager.shared.fetchAvatar(from: repos[0]) { result in
@@ -63,9 +71,7 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             case .failure(let error):
                 print(error.localizedDescription)
             case .success(let repo):
-                
                 DispatchQueue.main.async {
-                    
                     self.avatarImage.image = repo
                 }
             }
@@ -85,35 +91,52 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func fetchRepos() {
-        NetworkManager.shared.fetchRepos(for: "ramirezi29") { result in
+    func updateBio() {
+        guard let user = user else { return }
+        
+        nameLabel.text = user.name
+        locationLabel.text = user.location
+        followingLabel.text = "\(user.following)"
+        followersLabel.text = "\(user.followers)"
+    }
+    
+    func makeRounded() {
+        avatarImage.layer.borderWidth = 1
+        avatarImage.layer.masksToBounds = false
+        avatarImage.layer.cornerRadius = avatarImage.frame.height/2
+        avatarImage.clipsToBounds = true
+    }
+    
+    func fetchRepos(name: String) {
+        NetworkManager.shared.fetchRepos(for: name) { result in
             switch(result) {
             case .failure(let error):
                 print(error.localizedDescription)
             case .success(let repos):
                 self.repos = repos
-            }
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
         }
     }
     
-    func fetchUser() {
-        NetworkManager.shared.fetchDetails(of: "ramirezi29") { result in
+    func fetchUser(name: String) {
+        NetworkManager.shared.fetchDetails(of: name) { result in
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)
             case .success(let user):
                 self.user = user
-                
                 DispatchQueue.main.async {
-                    self.nameLabel.text = user.name
-                    self.locationLabel.text = user.location
-                    self.followingLabel.text = "\(user.following)"
-                    self.followersLabel.text = "\(user.followers)"
+                    self.updateBio()
                 }
             }
         }
+    }
+    
+    @IBAction func refreshButtonTapped(_ sender: Any) {
+        fetchRepos(name: name ?? "")
+        fetchUser(name: name ?? "")
     }
 }
