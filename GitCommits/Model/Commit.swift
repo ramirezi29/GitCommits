@@ -5,7 +5,7 @@
 //  Created by Ivan Ramirez on 5/16/21.
 //
 
-import Foundation
+import UIKit
 
 //struct TopLevelDictionary: Decodable {
 //    let commit: Commit
@@ -24,4 +24,7 @@ struct Commit: Decodable {
 struct Author: Decodable {
     let name: String
     let date: String
-}
+    
+    
+    }
+

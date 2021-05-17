@@ -60,15 +60,13 @@ class RepoDetailTVC: UITableViewController {
 
    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "detailRepoCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.detailRepoCell, for: indexPath)
 
         let index = commits[indexPath.row]
         
-        print(("\(index.commit.author.date)"))
         
+        cell.textLabel?.text = index.commit.author.date.prettyDate
         
-        cell.textLabel?.text = ("\(index.commit.author.date)")
-        cell.detailTextLabel?.text = index.commit.author.name
         return cell
     }
     
