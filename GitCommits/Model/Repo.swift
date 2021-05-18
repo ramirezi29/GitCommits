@@ -11,20 +11,21 @@ struct Repo: Decodable {
     let name: String
     let owner: Owner
     
+    //    enum CodingKeys: String, CodingKey {
+    //        case name
+    //        case owner
+    //    }
     
-    enum CodingKeys: String, CodingKey {
-        case name
-        case owner
-    }
-
 }
 
 struct Owner: Decodable {
     let avatarURL: URL?
+    let login: String
     
     enum CodingKeys: String, CodingKey {
         case avatarURL = "avatar_url"
-}
+        case login 
+    }
 }
 
 
