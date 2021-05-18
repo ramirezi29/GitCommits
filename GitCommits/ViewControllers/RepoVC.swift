@@ -7,22 +7,21 @@
 
 import UIKit
 
-class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var avatarImage: UIImageView!
     
+    @IBOutlet weak var searchButton: UIBarButtonItem!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var followersLabel: UILabel!
     
-    
-    var name: String?
+    private var searchAction: UIAlertAction?
     
     var repos: [Repo] = []
-    
     var user: User?
     
     override func viewDidLoad() {
@@ -30,9 +29,6 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         tableView.delegate = self
         tableView.dataSource = self
         navigationController?.navigationBar.prefersLargeTitles = true
-        fetchUser(name: name ?? "")
-        fetchRepos(name: name ?? "")
-        
         navigationController?.navigationBar.isTranslucent = true
     }
     
@@ -43,15 +39,15 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             self.tableView.reloadData()
         }
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-          navigationController?.navigationBar.shadowImage = UIImage()
-          navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
         updateBio()
         makeRounded()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        
         // Restore the navigation bar to default
         navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
         navigationController?.navigationBar.shadowImage = nil
@@ -66,17 +62,17 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let repo = repos[indexPath.row]
         cell.textLabel?.text = repo.name
         
-        NetworkManager.shared.fetchAvatar(from: repos[0]) { result in
-            switch(result) {
-            case .failure(let error):
-                print(error.localizedDescription)
-            case .success(let repo):
-                DispatchQueue.main.async {
-                    self.avatarImage.image = repo
-                }
-            }
-        }
+        fetchAvatar()
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Repos"
     }
     
     // MARK: - Navigation
@@ -100,6 +96,14 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         followersLabel.text = "\(user.followers)"
     }
     
+    func resetBio() {
+        
+        nameLabel.text = "Unkown Name"
+        locationLabel.text = "Location Unkown"
+        followingLabel.text = "Unkown"
+        followersLabel.text = "Unkown"
+    }
+    
     func makeRounded() {
         avatarImage.layer.borderWidth = 1
         avatarImage.layer.masksToBounds = false
@@ -108,35 +112,86 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func fetchRepos(name: String) {
-        NetworkManager.shared.fetchRepos(for: name) { result in
+        NetworkManager.shared.fetchRepos(for: name) { [weak self]   result in
             switch(result) {
             case .failure(let error):
-                print(error.localizedDescription)
-            case .success(let repos):
-                self.repos = repos
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                    let error =   AlertManager.presentAlertControllerWith(alertTitle: "", alertMessage: error.rawValue, dismissActionTitle: "OK")
+                    self?.present(error, animated: true, completion: nil)
+                    //                self?.avatarImage.image = UIImage(named: "gitHub")
+                }
+                return
+            case .success(let repos):
+                self?.repos = repos
+                DispatchQueue.main.async { [self] in
+                    self?.tableView.reloadData()
                 }
             }
         }
     }
     
     func fetchUser(name: String) {
-        NetworkManager.shared.fetchDetails(of: name) { result in
+        NetworkManager.shared.fetchDetails(of: name) { [weak self] result in
             switch result {
-            case .failure(let error):
-                print(error.localizedDescription)
-            case .success(let user):
-                self.user = user
+            case .failure(_):
                 DispatchQueue.main.async {
-                    self.updateBio()
+                    self?.resetBio()
+                }
+            case .success(let user):
+                self?.user = user
+                DispatchQueue.main.async {
+                    self?.updateBio()
                 }
             }
         }
     }
     
+    func fetchAvatar() {
+        NetworkManager.shared.fetchAvatar(from: repos[0]) { [weak self] result in
+            switch(result) {
+            case .failure(let error):
+                print(error.localizedDescription)
+            case .success(let repo):
+                DispatchQueue.main.async {
+                    self?.avatarImage.image = repo
+                }
+            }
+        }
+    }
+    
+    
+    @objc private func textFieldDidChange(_ field: UITextField) {
+        guard let searchAction = searchAction else { return }
+        searchAction.isEnabled = field.text?.count ?? 0 > 0
+    }
+    
+    
     @IBAction func refreshButtonTapped(_ sender: Any) {
-        fetchRepos(name: name ?? "")
-        fetchUser(name: name ?? "")
+        
+        let alertcontroller = UIAlertController(title: "Search for user", message: "Enter Name Below", preferredStyle: .alert)
+        
+        alertcontroller.addTextField { textField in
+            textField.placeholder = "Enter GitHub User Name"
+            //            nameTextfield = textField
+            textField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
+        }
+        
+        let textField = alertcontroller.textFields?[0]
+        let dismissAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        searchAction = UIAlertAction(title: "OK", style: .default) { _ in
+            
+            if let name = textField?.text, !name.isEmpty {
+                self.fetchRepos(name: name)
+                self.fetchUser(name: name)
+            }
+        }
+        
+        searchAction?.isEnabled = false
+        
+        [dismissAction, searchAction ?? UIAlertAction()].forEach { alertcontroller.addAction($0) }
+        
+        self.present(alertcontroller, animated: true, completion: nil)
     }
 }
+

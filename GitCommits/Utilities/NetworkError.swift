@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum NetworkingError: Error {
+enum NetworkingError: String, Error {
     
-    case badBaseURL(String)
-    case forwardedError(Error)
-    case invalidData(String)
-    case badBuiltURL(String)
-    case invalidResponse(String)
+    case badBaseURL = "Ensure the URL is valid"
+    case invalidData = "Unable to read data. Please try again"
+    case badBuiltURL = "The built URL is bad. Ensure the URL is built correctly"
+    case invalidResponse = "Error with the serve. Please try again"
+    case errorWithRequest = "Error with your request. Please try again"
 }

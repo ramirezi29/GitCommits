@@ -21,10 +21,10 @@ class NetworkManager {
     func fetchRepos(for user: String, completion: @escaping (Result<[Repo], NetworkingError>) -> Void) {
         
         guard var url = URL(string:baseURL) else {
-            completion(.failure(.badBaseURL("Base URL is not valid")))
-            
+            completion(.failure(.badBaseURL))
             return
         }
+        
         // https://api.github.com/repos/ramirezi29/cardsofoppurtunity/commits
         // https://api.github.com/users/ramirezi29/repos
         url.appendPathComponent("users")
@@ -33,33 +33,26 @@ class NetworkManager {
         let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
         
         guard let builtURL = components?.url else {
-            completion(.failure(.badBuiltURL("Complete URL is not valid")))
+            completion(.failure(.badBuiltURL))
             print("Error with built URL")
             return
         }
         
-        URLSession.shared.dataTask(with: builtURL) { (data, _, error) in
+        URLSession.shared.dataTask(with: builtURL) { (data, response, error) in
             
             if let error = error {
-                completion(.failure(NetworkingError.forwardedError(error)))
+                completion(.failure(.errorWithRequest))
                 print(error.localizedDescription)
                 return
             }
             
-            //            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 400 else {
-            //
-            //
-            //                return
-            //            guard (response != nil), let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 400 else {
-            //                completion(.failure(NetworkingError.invalidRespone("\(response.debugDescription)")))
-            //                print(response.debugDescription)
-            //                return
-            //            }
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completion(.failure(.invalidResponse))
+                return
+            }
             
             guard let data = data else {
-                completion(.failure(.invalidData("Invalid Data")))
-                print(error?.localizedDescription as Any)
-                
+                completion(.failure(.invalidData))
                 return
             }
             
@@ -70,7 +63,7 @@ class NetworkManager {
                 completion(.success(user))
             } catch {
                 print(error.localizedDescription)
-                completion(.failure(.forwardedError(error)))
+                completion(.failure(.errorWithRequest))
             }
         }.resume()
     }
@@ -84,18 +77,18 @@ class NetworkManager {
     func fetchAvatar(from repo: Repo, completion: @escaping (Result<UIImage?, NetworkingError>) -> Void) {
         
         guard let url = repo.owner.avatarURL else {
-            return(completion(.failure(.badBuiltURL("Check the URL"))))
+            return(completion(.failure(.badBuiltURL)))
             
         }
         
         URLSession.shared.dataTask(with: url) { (data, _, error) in
-            if let error = error {
-                completion(.failure(.forwardedError(error)))
+            if let _ = error {
+                completion(.failure(.errorWithRequest))
                 return
             }
             
             guard let data = data else {
-                completion(.failure(.invalidData("The data was invalid")))
+                completion(.failure(.invalidData))
                 return
             }
             
@@ -111,7 +104,7 @@ class NetworkManager {
         
         // ->> https://api.github.com/repos/ramirezi29/cardsofoppurtunity/commits/per_page=25
         guard var url = URL(string:baseURL) else {
-            completion(.failure(.badBaseURL("Base URL is not valid")))
+            completion(.failure(.badBaseURL))
             return
         }
         
@@ -126,18 +119,23 @@ class NetworkManager {
         components?.queryItems = [itemQuery]
         
         guard let builtURL = components?.url else {
-            completion(.failure(.badBuiltURL("The get repo details URL is invalid")))
+            completion(.failure(.badBuiltURL))
             return
         }
         
-        URLSession.shared.dataTask(with: builtURL) { data, _, error in
-            if let error = error {
-                completion(.failure(.forwardedError(error)))
+        URLSession.shared.dataTask(with: builtURL) { data, response, error in
+            if let _ = error {
+                completion(.failure(.errorWithRequest))
                 return
             }
             
             guard let data = data else {
-                completion(.failure(.invalidData("repo details data is not valid")))
+                completion(.failure(.invalidData))
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completion(.failure(.invalidResponse))
                 return
             }
             
@@ -148,7 +146,7 @@ class NetworkManager {
                 
                 completion(.success(repoCommit))
             } catch {
-                completion(.failure(.forwardedError(error)))
+                completion(.failure(.errorWithRequest))
             }
         }.resume()
     }
@@ -156,7 +154,7 @@ class NetworkManager {
     func fetchDetails(of user: String, completion: @escaping (Result<User, NetworkingError>) -> Void) {
         
         guard var url = URL(string: baseURL) else {
-            completion(.failure(.badBaseURL("Base URL is not valid")))
+            completion(.failure(.badBaseURL))
             return
         }
         url.appendPathComponent("users")
@@ -165,7 +163,7 @@ class NetworkManager {
         let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
         
         guard let builtURL = components?.url else {
-            completion(.failure(.badBuiltURL("Complete URL is not valid")))
+            completion(.failure(.badBuiltURL))
             print("Error with built URL")
             return
         }
@@ -173,12 +171,12 @@ class NetworkManager {
         URLSession.shared.dataTask(with: builtURL) { (data, _, error) in
             
             if let error = error {
-                completion(.failure(NetworkingError.forwardedError(error)))
+                completion(.failure(.errorWithRequest))
                 print(error.localizedDescription)
                 return
             }
             guard let data = data else {
-                completion(.failure(.invalidData("Invalid Data")))
+                completion(.failure(.invalidData))
                 print(error?.localizedDescription as Any)
                 
                 return
@@ -191,7 +189,7 @@ class NetworkManager {
                 completion(.success(user))
             } catch {
                 print(error.localizedDescription)
-                completion(.failure(.forwardedError(error)))
+                completion(.failure(.errorWithRequest))
             }
         }.resume()
     }

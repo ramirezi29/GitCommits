@@ -7,40 +7,62 @@
 
 import UIKit
 
-@main
+
+@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
-
+    
+    var window: UIWindow?
+    var isOffline: Bool = false
+    var reachability: Reachability?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        self.reachability = Reachability()
         
-//        NetworkManager.shared.fetchRepos(for: "ramirezi29") { (result) in
-//            switch result {
-//            case .success( let repos):
-//                print(repos)
-//            case .failure(let error):
-//                print("Error with the fetch\n\(error.localizedDescription)")
-//            }
-//        }
+        StroryBoardManager.shared.presentMyStoryboard(window: window)
         
-        // Override point for customization after application launch.
+        // From no network to network
+        reachability?.whenReachable = { reachability in
+            DispatchQueue.main.async() {
+                self.setOfflineView(false)
+            }
+        }
+        // From network to no network
+        reachability?.whenUnreachable = { reachability in
+            DispatchQueue.main.async() {
+                self.setOfflineView(true)
+            }
+        }
+        do {
+            // On start up this fires to check
+            try reachability?.startNotifier()
+        } catch {
+            print("could not start reachability notifier")
+        }
+        
+        
+        
         return true
     }
-
-    // MARK: UISceneSession Lifecycle
-
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+    
+    // when disableOnboardingBool is true, then the offline view can be presented. This design pattern is to prevent the offline view from being presented over the initial login screen
+    func setOfflineView(_ offline: Bool) {
+        switch offline {
+        case true:
+            if UserDefaultManager.shared.boolValue(for: Constants.isOnboardedKey) {
+                StroryBoardManager.shared.instantiateOfflineView(window: window)
+            }
+        case false:
+            StroryBoardManager.shared.removeOfflinveView(window: window)
+        }
     }
-
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        isOffline = self.reachability?.currentReachabilityStatus == Reachability.NetworkStatus.notReachable
+        if (isOffline) {
+            setOfflineView(isOffline)
+        }
     }
-
-
 }
 

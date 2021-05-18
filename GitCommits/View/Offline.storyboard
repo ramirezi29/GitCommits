@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Xbp-AR-bSL">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Off LineVC-->
+        <scene sceneID="Hhd-8l-Ilh">
+            <objects>
+                <viewController storyboardIdentifier="offlineView" id="Xbp-AR-bSL" customClass="OffLineVC" customModule="GitCommits" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3pc-VP-kEU">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="9iK-Cw-7Jr">
+                                <rect key="frame" x="21.5" y="129" width="371" height="305"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connection Lost" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="57n-zG-Zr5">
+                                        <rect key="frame" x="74" y="0.0" width="223.5" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="OfflineImage" translatesAutoresizingMaskIntoConstraints="NO" id="oBF-6D-hYF">
+                                        <rect key="frame" x="89.5" y="60" width="192" height="192"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please reconnect to the internet " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4E-b9-sT6">
+                                        <rect key="frame" x="19.5" y="276" width="332" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6DO-sU-uOO"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="57n-zG-Zr5" firstAttribute="top" secondItem="6DO-sU-uOO" secondAttribute="top" constant="85" id="4To-xw-dKa"/>
+                            <constraint firstItem="9iK-Cw-7Jr" firstAttribute="leading" secondItem="6DO-sU-uOO" secondAttribute="leading" constant="21.5" id="6pP-s3-MRZ"/>
+                            <constraint firstItem="9iK-Cw-7Jr" firstAttribute="centerX" secondItem="6DO-sU-uOO" secondAttribute="centerX" id="a6M-4e-xp0"/>
+                            <constraint firstItem="6DO-sU-uOO" firstAttribute="trailing" secondItem="9iK-Cw-7Jr" secondAttribute="trailing" constant="21.5" id="gOJ-tH-Ldl"/>
+                            <constraint firstItem="9iK-Cw-7Jr" firstAttribute="top" secondItem="6DO-sU-uOO" secondAttribute="top" constant="85" id="urj-Ec-vcd"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="offlineDetailLabel" destination="c4E-b9-sT6" id="2YM-qe-p27"/>
+                        <outlet property="offlineTitleLabel" destination="57n-zG-Zr5" id="70x-f2-9yh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JlD-bW-8dn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="229" y="82"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="OfflineImage" width="192" height="192"/>
+    </resources>
+</document>
