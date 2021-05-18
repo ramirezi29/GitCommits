@@ -7,6 +7,10 @@
 
 import Foundation
 
+/**
+ Enum of string values related to possible errors that could occuring duirng a network call
+ 
+ */
 enum NetworkingError: String, Error {
     
     case badBaseURL = "Ensure the URL is valid"

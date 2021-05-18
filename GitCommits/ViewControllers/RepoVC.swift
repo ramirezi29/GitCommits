@@ -38,17 +38,13 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
+        naviContStyling() 
         updateBio()
-        makeRounded()
+        avatarImageStyling()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        // Restore the navigation bar to default
         navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
         navigationController?.navigationBar.shadowImage = nil
     }
@@ -57,23 +53,26 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         repos.count
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.repoCell, for: indexPath)
         let repo = repos[indexPath.row]
+        
         cell.textLabel?.text = repo.name
         
+        //NOTE: - fetchAvatar function added in cell for row at in order to combat race conditions where the repo value is nill
         fetchAvatar()
         
         return cell
     }
     
-     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let headerView = view as? UITableViewHeaderFooterView else { return }
         headerView.tintColor = #colorLiteral(red: 0.4148489237, green: 0.4674612284, blue: 0.7991535068, alpha: 1) 
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Repos"
+        return Constants.RepositoriesText
     }
     
     // MARK: - Navigation
@@ -97,19 +96,24 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         followersLabel.text = "\(user.followers)"
     }
     
-    func resetBio() {
-        
-        nameLabel.text = "Unkown Name"
-        locationLabel.text = "Location Unkown"
-        followingLabel.text = "Unkown"
-        followersLabel.text = "Unkown"
+    func resetBioDetails() {
+        nameLabel.text = "Name \(Constants.unkownText)"
+        locationLabel.text = "Location \(Constants.unkownText)"
+        followingLabel.text = Constants.unkownText
+        followersLabel.text = Constants.unkownText
     }
     
-    func makeRounded() {
+    func avatarImageStyling() {
         avatarImage.layer.borderWidth = 1
         avatarImage.layer.masksToBounds = false
         avatarImage.layer.cornerRadius = avatarImage.frame.height/2
         avatarImage.clipsToBounds = true
+    }
+    
+    func naviContStyling() {
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
     }
     
     func fetchRepos(name: String) {
@@ -135,7 +139,7 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
             switch result {
             case .failure(_):
                 DispatchQueue.main.async {
-                    self?.resetBio()
+                    self?.resetBioDetails()
                 }
             case .success(let user):
                 self?.user = user
@@ -146,6 +150,7 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         }
     }
     
+    //NOTE - We're displaying the avator image associated with the first repository in a user's account
     func fetchAvatar() {
         NetworkManager.shared.fetchAvatar(from: repos[0]) { [weak self] result in
             switch(result) {
@@ -159,20 +164,24 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         }
     }
     
-    
+    /**
+     Function associated with the search GitHub name textfield. Purpose is to let the program know if the textfield has an entry or not.
+     
+     */
     @objc private func textFieldDidChange(_ field: UITextField) {
         guard let searchAction = searchAction else { return }
         searchAction.isEnabled = field.text?.count ?? 0 > 0
     }
     
-    
-    @IBAction func refreshButtonTapped(_ sender: Any) {
-        
+    /**
+     Function presents an alert that prompts the user for a GitHub user's account name. If successful a users repositories and user details are fetched through specific functions also included in this function.
+     
+     */
+    @IBAction func searchButtonTapped(_ sender: Any) {
         let alertcontroller = UIAlertController(title: "User Search", message: "", preferredStyle: .alert)
         
         alertcontroller.addTextField { textField in
             textField.placeholder = "Enter GitHub User Name"
-            //            nameTextfield = textField
             textField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
         }
         

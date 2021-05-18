@@ -11,9 +11,9 @@ struct UserDefaultManager {
     static let shared = UserDefaultManager()
     
     /**
-     Provides the value stored in UserDefaults key Constants isOnboardedKey
+     Provides the value stored in UserDefaults
      
-     ## Important Note ##
+     ## Note ##
      This returns a bool
      */
     func boolValue(for key: String) -> Bool {
@@ -21,10 +21,10 @@ struct UserDefaultManager {
     }
     
     /**
-     A function that accepts a bool value to change the UserDefaults bool for key value isOnboardedKey
+     A function that accepts a bool value to change the UserDefaults bool for key value
      
-     ## Note ##
-     At the time of writing this app it is only being used to to set the isOnboardedKey to true. The function was made to accept a either bool value in order for testing purposes and in order to preform future complex logic if  needed.
+     ## Important Note ##
+     Currently being used to set the bool value to true
      */
     func setOnboardBool(to : Bool, for key: String) {
         UserDefaults.standard.set(to, forKey: key)

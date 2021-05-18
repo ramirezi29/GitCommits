@@ -28,7 +28,6 @@ class RepoDetailTVC: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return commits.count
     }
     
@@ -36,7 +35,7 @@ class RepoDetailTVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.detailRepoCell, for: indexPath)
         let index = commits[indexPath.row]
-        cell.textLabel?.text = index.commit.author.date.prettyDate
+        cell.textLabel?.text = index.commit.author.date.readableDate
         
         return cell
     }
@@ -53,13 +52,14 @@ class RepoDetailTVC: UITableViewController {
         }
     }
     
+    //NOTE: - Future version would include more robust error handling to properly handling when the fetch repo call fails
     func fetchRepos() {
         guard let repo = repo else { return }
         
         NetworkManager.shared.getRepoDetails(for: repo.owner.login, repoName: repo.name) { result in
             switch result {
-            case (.failure(let error)):
-                print(error.localizedDescription)
+            case (.failure(_)):
+                return
             case (.success(let commits)):
                 self.commits = commits
                 DispatchQueue.main.async {

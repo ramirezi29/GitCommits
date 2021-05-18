@@ -11,13 +11,17 @@ class OffLineVC: UIViewController {
     
     @IBOutlet weak var offlineDetailLabel: UILabel!
     @IBOutlet weak var offlineTitleLabel: UILabel!
-    //Needed in order to keep device's dark mode settings from being active
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadText()
+        styleLabels()
     }
     
-    func loadText() {
+    /**
+     Function styles the text according if the user's device is an iPad or iPhone
+     
+     */
+    func styleLabels() {
         if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
             offlineDetailLabel.font = UIFont.systemFont(ofSize: 30, weight: .medium)
             offlineTitleLabel.font = UIFont.systemFont(ofSize: 34, weight: .bold)

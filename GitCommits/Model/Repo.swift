@@ -10,12 +10,6 @@ import Foundation
 struct Repo: Decodable {
     let name: String
     let owner: Owner
-    
-    //    enum CodingKeys: String, CodingKey {
-    //        case name
-    //        case owner
-    //    }
-    
 }
 
 struct Owner: Decodable {

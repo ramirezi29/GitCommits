@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FFx-1d-EVv">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -12,35 +13,34 @@
             <objects>
                 <viewController storyboardIdentifier="OnboardingScreen" id="FFx-1d-EVv" customClass="OnboardingVC" customModule="GitCommits" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RbB-MJ-noL">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="github" translatesAutoresizingMaskIntoConstraints="NO" id="FJQ-Rg-ZsX">
-                                <rect key="frame" x="72.5" y="75" width="269" height="269"/>
+                                <rect key="frame" x="65.5" y="31" width="244" height="244"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="FJQ-Rg-ZsX" secondAttribute="height" multiplier="2.5:1" constant="-403.5" id="R3g-3p-BBF"/>
+                                    <constraint firstAttribute="width" secondItem="FJQ-Rg-ZsX" secondAttribute="height" multiplier="2.5:1" constant="-366" id="R3g-3p-BBF"/>
                                 </constraints>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="Rl2-4f-o20">
-                                <rect key="frame" x="41.5" y="441" width="331" height="14"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="Rl2-4f-o20">
+                                <rect key="frame" x="37.5" y="329" width="300" height="35"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpU-tp-kQA">
-                                        <rect key="frame" x="0.0" y="0.0" width="331" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khZ-dS-4Wn">
-                                        <rect key="frame" x="0.0" y="14" width="331" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="35" width="300" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5cL-W4-oc5" customClass="IRButton">
-                                <rect key="frame" x="72.5" y="698" width="269" height="64"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5cL-W4-oc5" customClass="IRButton" customModule="GitCommits" customModuleProvider="target">
+                                <rect key="frame" x="65.5" y="461" width="244" height="64"/>
                                 <color key="backgroundColor" red="0.41484892369999998" green="0.46746122839999998" blue="0.79915350679999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="S7m-Fq-dsl"/>
@@ -55,28 +55,28 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Tdo-x7-zHM"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Rl2-4f-o20" firstAttribute="centerX" secondItem="Tdo-x7-zHM" secondAttribute="centerX" id="1pA-kT-TiE"/>
                             <constraint firstItem="FJQ-Rg-ZsX" firstAttribute="centerX" secondItem="RbB-MJ-noL" secondAttribute="centerX" id="6Al-Tc-pxS"/>
                             <constraint firstItem="5cL-W4-oc5" firstAttribute="width" secondItem="RbB-MJ-noL" secondAttribute="width" multiplier="0.65" id="AyV-HW-dYX"/>
                             <constraint firstItem="Rl2-4f-o20" firstAttribute="width" secondItem="RbB-MJ-noL" secondAttribute="width" multiplier="0.8" id="PgU-8D-55b"/>
                             <constraint firstItem="Rl2-4f-o20" firstAttribute="centerX" secondItem="5cL-W4-oc5" secondAttribute="centerX" id="Sxu-y9-beN"/>
-                            <constraint firstItem="Rl2-4f-o20" firstAttribute="centerY" secondItem="RbB-MJ-noL" secondAttribute="centerY" id="gJ3-zn-eya"/>
+                            <constraint firstItem="Rl2-4f-o20" firstAttribute="centerY" secondItem="RbB-MJ-noL" secondAttribute="centerY" constant="13" id="gJ3-zn-eya"/>
                             <constraint firstItem="FJQ-Rg-ZsX" firstAttribute="top" secondItem="Tdo-x7-zHM" secondAttribute="top" constant="31" id="glp-VE-eg7"/>
                             <constraint firstItem="FJQ-Rg-ZsX" firstAttribute="width" secondItem="RbB-MJ-noL" secondAttribute="width" multiplier="0.65" id="tWr-Le-vSi"/>
-                            <constraint firstItem="Tdo-x7-zHM" firstAttribute="bottom" secondItem="5cL-W4-oc5" secondAttribute="bottom" constant="100" id="uNX-3I-CnR"/>
+                            <constraint firstItem="Tdo-x7-zHM" firstAttribute="bottom" secondItem="5cL-W4-oc5" secondAttribute="bottom" constant="142" id="uNX-3I-CnR"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="detailTextLabel" destination="khZ-dS-4Wn" id="Kfd-bm-KhB"/>
+                        <outlet property="detailTextLabel" destination="khZ-dS-4Wn" id="lNU-DF-WLT"/>
                         <outlet property="onboardingButton" destination="5cL-W4-oc5" id="Iw5-gB-9fU"/>
-                        <outlet property="titleTextLabel" destination="rpU-tp-kQA" id="88P-mP-5yA"/>
+                        <outlet property="titleTextLabel" destination="rpU-tp-kQA" id="yLW-4K-4xv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B5C-eA-zhw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1594" y="-149"/>
+            <point key="canvasLocation" x="1592.753623188406" y="-149.33035714285714"/>
         </scene>
         <!--onLineView-->
         <scene sceneID="nUk-TC-KnX">
@@ -89,5 +89,8 @@
     </scenes>
     <resources>
         <image name="github" width="170.66667175292969" height="170.66667175292969"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

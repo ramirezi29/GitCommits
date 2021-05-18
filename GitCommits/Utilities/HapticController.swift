@@ -11,6 +11,10 @@ class HapticController {
     
     static var selection: UISelectionFeedbackGenerator?
     
+    /**
+     Creates a selected change style haptic feedback response.
+     
+     */
     static func createFeedBack() {
         var activateHaptic = true
         switch activateHaptic {
