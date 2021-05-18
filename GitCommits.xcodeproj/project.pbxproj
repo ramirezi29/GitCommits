@@ -24,7 +24,6 @@
 		1BBF68A0265065BC002172DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BBF689F265065BC002172DF /* Assets.xcassets */; };
 		1BBF68A3265065BC002172DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BBF68A1265065BC002172DF /* LaunchScreen.storyboard */; };
 		1BBF68AE265065BC002172DF /* GitCommitsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBF68AD265065BC002172DF /* GitCommitsTests.swift */; };
-		1BBF68B9265065BC002172DF /* GitCommitsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBF68B8265065BC002172DF /* GitCommitsUITests.swift */; };
 		1BBF68CD2650AB1A002172DF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBF68CC2650AB1A002172DF /* NetworkManager.swift */; };
 		1BBF68CF2650B68E002172DF /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBF68CE2650B68E002172DF /* NetworkError.swift */; };
 		1BBF68D12650CDC1002172DF /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBF68D02650CDC1002172DF /* Repo.swift */; };
@@ -75,8 +74,6 @@
 		1BBF68AD265065BC002172DF /* GitCommitsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitCommitsTests.swift; sourceTree = "<group>"; };
 		1BBF68AF265065BC002172DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BBF68B4265065BC002172DF /* GitCommitsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GitCommitsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1BBF68B8265065BC002172DF /* GitCommitsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitCommitsUITests.swift; sourceTree = "<group>"; };
-		1BBF68BA265065BC002172DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BBF68CC2650AB1A002172DF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		1BBF68CE2650B68E002172DF /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		1BBF68D02650CDC1002172DF /* Repo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repo.swift; sourceTree = "<group>"; };
@@ -117,7 +114,6 @@
 			children = (
 				1BBF6895265065BB002172DF /* GitCommits */,
 				1BBF68AC265065BC002172DF /* GitCommitsTests */,
-				1BBF68B7265065BC002172DF /* GitCommitsUITests */,
 				1BBF6894265065BB002172DF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -154,15 +150,6 @@
 				1BBF68AF265065BC002172DF /* Info.plist */,
 			);
 			path = GitCommitsTests;
-			sourceTree = "<group>";
-		};
-		1BBF68B7265065BC002172DF /* GitCommitsUITests */ = {
-			isa = PBXGroup;
-			children = (
-				1BBF68B8265065BC002172DF /* GitCommitsUITests.swift */,
-				1BBF68BA265065BC002172DF /* Info.plist */,
-			);
-			path = GitCommitsUITests;
 			sourceTree = "<group>";
 		};
 		1BBF68C626506EE7002172DF /* Model */ = {
@@ -396,7 +383,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BBF68B9265065BC002172DF /* GitCommitsUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,13 +10,16 @@ import UIKit
 class NetworkManager {
     
     static let shared = NetworkManager()
-    private let baseURL = "https://api.github.com"
+    private let baseURL = Constants.baseURL
     
     /**
-     Get the user based on their GitHub user name
+     Get the user's repository based on their GitHub user name
+     - name
+     - avatarURL
+     - login
      
      ## Important Note ##
-     The user name needs to be valid
+     The user name needs to be valid in order to fully run the fetch request.
      */
     func fetchRepos(for user: String, completion: @escaping (Result<[Repo], NetworkingError>) -> Void) {
         
@@ -25,21 +28,18 @@ class NetworkManager {
             return
         }
         
-        // https://api.github.com/repos/ramirezi29/cardsofoppurtunity/commits
-        // https://api.github.com/users/ramirezi29/repos
-        url.appendPathComponent("users")
+        url.appendPathComponent(Constants.usersText)
         url.appendPathComponent(user)
-        url.appendPathComponent("repos")
+        url.appendPathComponent(Constants.reposText)
+        
         let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
         
         guard let builtURL = components?.url else {
             completion(.failure(.badBuiltURL))
-            print("Error with built URL")
             return
         }
         
         URLSession.shared.dataTask(with: builtURL) { (data, response, error) in
-            
             if let error = error {
                 completion(.failure(.errorWithRequest))
                 print(error.localizedDescription)
@@ -69,10 +69,10 @@ class NetworkManager {
     }
     
     /**
-     Get the user's avatar image'
+     Get the user avatar image from their GitHub account
      
-     ## Important Note ##
-     The user name needs to be valid
+     ## Note ##
+     If no avatar image is found no image will be returned
      */
     func fetchAvatar(from repo: Repo, completion: @escaping (Result<UIImage?, NetworkingError>) -> Void) {
         
@@ -97,23 +97,29 @@ class NetworkManager {
         }.resume()
     }
     
+    /**
+     This function fetches the following details from a user's GitHub account
+     - sha
+     - message
+     - name
+     - date
+     
+     ## Important Note ##
+     The user name needs to be valid
+     */
     func getRepoDetails(for githubUser: String, repoName: String, completion: @escaping (Result<[RepoCommit], NetworkingError>) -> Void) {
         
-        //https://api.github.com/repos/ramirezi29/cardsofoppurtunity/commits
-        //https://api.github.com/repos/ramirezi29/AlarmClock_iOS22/Commits/per_page=25
-        
-        // ->> https://api.github.com/repos/ramirezi29/cardsofoppurtunity/commits/per_page=25
         guard var url = URL(string:baseURL) else {
             completion(.failure(.badBaseURL))
             return
         }
         
-        url.appendPathComponent("repos")
+        url.appendPathComponent(Constants.reposText)
         url.appendPathComponent(githubUser)
         url.appendPathComponent(repoName)
-        url.appendPathComponent("commits")
-        let itemQuery = URLQueryItem(name: "per_page", value: "25")
+        url.appendPathComponent(Constants.commitsText)
         
+        let itemQuery = URLQueryItem(name: Constants.perPageText, value: Constants.twentyFiveText)
         
         var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
         components?.queryItems = [itemQuery]
@@ -157,17 +163,16 @@ class NetworkManager {
             completion(.failure(.badBaseURL))
             return
         }
-        url.appendPathComponent("users")
+        url.appendPathComponent(Constants.usersText)
         url.appendPathComponent(user)
         
         let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
         
         guard let builtURL = components?.url else {
             completion(.failure(.badBuiltURL))
-            print("Error with built URL")
             return
         }
-        print("\n❤️\(builtURL.absoluteURL)\n")
+        
         URLSession.shared.dataTask(with: builtURL) { (data, _, error) in
             
             if let error = error {
@@ -178,7 +183,6 @@ class NetworkManager {
             guard let data = data else {
                 completion(.failure(.invalidData))
                 print(error?.localizedDescription as Any)
-                
                 return
             }
             

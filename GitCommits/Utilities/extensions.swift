@@ -9,7 +9,11 @@ import UIKit
 
 extension String {
     
-    var prettyDate: String {
+    /**
+     Turns a "yyyy-MM-dd'T'HH:mm:ssZ" styled String date into a redable format
+     
+     */
+    var readableDate: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         
