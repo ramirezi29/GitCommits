@@ -20,6 +20,9 @@ class RepoDetailTVC: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let textAttributes = [NSAttributedString.Key.foregroundColor:#colorLiteral(red: 0.4148489237, green: 0.4674612284, blue: 0.7991535068, alpha: 1)]
+        
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
     }
     
     // MARK: - Table view data source

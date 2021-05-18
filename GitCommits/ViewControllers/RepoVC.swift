@@ -67,8 +67,9 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         return cell
     }
     
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        
+     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let headerView = view as? UITableViewHeaderFooterView else { return }
+        headerView.tintColor = #colorLiteral(red: 0.4148489237, green: 0.4674612284, blue: 0.7991535068, alpha: 1) 
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -118,7 +119,6 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
                 DispatchQueue.main.async {
                     let error =   AlertManager.presentAlertControllerWith(alertTitle: "", alertMessage: error.rawValue, dismissActionTitle: "OK")
                     self?.present(error, animated: true, completion: nil)
-                    //                self?.avatarImage.image = UIImage(named: "gitHub")
                 }
                 return
             case .success(let repos):
@@ -168,7 +168,7 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     
     @IBAction func refreshButtonTapped(_ sender: Any) {
         
-        let alertcontroller = UIAlertController(title: "Search for user", message: "Enter Name Below", preferredStyle: .alert)
+        let alertcontroller = UIAlertController(title: "User Search", message: "", preferredStyle: .alert)
         
         alertcontroller.addTextField { textField in
             textField.placeholder = "Enter GitHub User Name"
