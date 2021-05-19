@@ -11,6 +11,7 @@ class RepoDetailTVC: UITableViewController {
     
     var repo: Repo?
     var commits: [RepoCommit] = []
+    private let networkManager = NetworkManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +57,7 @@ class RepoDetailTVC: UITableViewController {
     func fetchRepos() {
         guard let repo = repo else { return }
         
-        NetworkManager.shared.getRepoDetails(for: repo.owner.login, repoName: repo.name) { result in
+        networkManager.getRepoDetails(for: repo.owner.login, repoName: repo.name) { result in
             switch result {
             case (.failure(_)):
                 return

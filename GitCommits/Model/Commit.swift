@@ -7,10 +7,6 @@
 
 import UIKit
 
-//struct TopLevelDictionary: Decodable {
-//    let commit: Commit
-//}
-
 struct RepoCommit: Decodable {
     let commit: Commit
     let sha: String
@@ -24,5 +20,5 @@ struct Commit: Decodable {
 struct Author: Decodable {
     let name: String
     let date: String
-    }
+}
 

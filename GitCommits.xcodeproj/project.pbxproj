@@ -30,7 +30,7 @@
 		1BBF68D726510AA8002172DF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBF68D626510AA8002172DF /* Constants.swift */; };
 		1BBF68D926510B15002172DF /* RepoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBF68D826510B15002172DF /* RepoVC.swift */; };
 		1BE070A52651AB1300CCA584 /* RepoDetailTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE070A42651AB1300CCA584 /* RepoDetailTVC.swift */; };
-		1BE070A72651B22E00CCA584 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE070A62651B22E00CCA584 /* extensions.swift */; };
+		1BE070A72651B22E00CCA584 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE070A62651B22E00CCA584 /* Extensions.swift */; };
 		1BE070A92651D52500CCA584 /* Commit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE070A82651D52500CCA584 /* Commit.swift */; };
 /* End PBXBuildFile section */
 
@@ -80,7 +80,7 @@
 		1BBF68D626510AA8002172DF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1BBF68D826510B15002172DF /* RepoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoVC.swift; sourceTree = "<group>"; };
 		1BE070A42651AB1300CCA584 /* RepoDetailTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoDetailTVC.swift; sourceTree = "<group>"; };
-		1BE070A62651B22E00CCA584 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
+		1BE070A62651B22E00CCA584 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1BE070A82651D52500CCA584 /* Commit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -189,7 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				1BBF68CE2650B68E002172DF /* NetworkError.swift */,
-				1BE070A62651B22E00CCA584 /* extensions.swift */,
+				1BE070A62651B22E00CCA584 /* Extensions.swift */,
 				1B02B8D32653A54800E3C9DD /* Reachability.swift */,
 				1B02B8D72653A58A00E3C9DD /* HapticController.swift */,
 				1B02B8E62653BBD400E3C9DD /* IRButton.swift */,
@@ -361,7 +361,7 @@
 				1B02B8DE2653A72700E3C9DD /* OnboardingVC.swift in Sources */,
 				1BBF68D726510AA8002172DF /* Constants.swift in Sources */,
 				1BE070A52651AB1300CCA584 /* RepoDetailTVC.swift in Sources */,
-				1BE070A72651B22E00CCA584 /* extensions.swift in Sources */,
+				1BE070A72651B22E00CCA584 /* Extensions.swift in Sources */,
 				1B6ECD4A26523BE8001FF11E /* RepoPopOverVC.swift in Sources */,
 				1BBF68D926510B15002172DF /* RepoVC.swift in Sources */,
 				1B02B8E32653A9E700E3C9DD /* UserDefaultsManager.swift in Sources */,

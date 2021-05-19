@@ -32,7 +32,7 @@ struct Constants {
     static let isOnboardedKey = "isOnboardedKey"
     
     //Text
-    static let RepositoriesText = "Repositories"
+    static let repositoriesText = "Repositories"
     static let unkownText = "Unknown"
     static let appNameText = "Git Commits"
     static let appDetailText = "Thank you for reviewing my app"

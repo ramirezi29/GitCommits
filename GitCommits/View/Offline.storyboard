@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="9iK-Cw-7Jr">
-                                <rect key="frame" x="21.5" y="129" width="371" height="305"/>
+                                <rect key="frame" x="21.5" y="129" width="371" height="283.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connection Lost" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="57n-zG-Zr5">
                                         <rect key="frame" x="74" y="0.0" width="223.5" height="36"/>
@@ -24,11 +25,11 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="OfflineImage" translatesAutoresizingMaskIntoConstraints="NO" id="oBF-6D-hYF">
-                                        <rect key="frame" x="89.5" y="60" width="192" height="192"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="github" translatesAutoresizingMaskIntoConstraints="NO" id="oBF-6D-hYF">
+                                        <rect key="frame" x="100" y="60" width="171" height="170.5"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please reconnect to the internet " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4E-b9-sT6">
-                                        <rect key="frame" x="19.5" y="276" width="332" height="29"/>
+                                        <rect key="frame" x="19.5" y="254.5" width="332" height="29"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -37,7 +38,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6DO-sU-uOO"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="57n-zG-Zr5" firstAttribute="top" secondItem="6DO-sU-uOO" secondAttribute="top" constant="85" id="4To-xw-dKa"/>
                             <constraint firstItem="9iK-Cw-7Jr" firstAttribute="leading" secondItem="6DO-sU-uOO" secondAttribute="leading" constant="21.5" id="6pP-s3-MRZ"/>
@@ -57,6 +58,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="OfflineImage" width="192" height="192"/>
+        <image name="github" width="170.66667175292969" height="170.66667175292969"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

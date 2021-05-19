@@ -12,19 +12,12 @@ class HapticController {
     static var selection: UISelectionFeedbackGenerator?
     
     /**
-     Creates a selected change style haptic feedback response.
+     Creates a selected change style haptic feedback response
      
      */
     static func createFeedBack() {
-        var activateHaptic = true
-        switch activateHaptic {
-        case true:
-            selection = UISelectionFeedbackGenerator()
-            selection?.prepare()
-            selection?.selectionChanged()
-            activateHaptic.toggle()
-        case false:
-            selection = nil
-        }
+        selection = UISelectionFeedbackGenerator()
+        selection?.prepare()
+        selection?.selectionChanged()
     }
 }
