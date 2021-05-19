@@ -1,6 +1,6 @@
 
 # GitCommits
-> Our mobile iOS application allows to search for a GitHub user and comb, through thier repositories. In the app, you will be able to get basic details about the user, as well as their repository commit details. 
+> Our mobile iOS application allows to search for a GitHub user and comb, through their repositories. In the app, you will be able to get basic details about the user, as well as their repository commit details. 
 
 [![Swift Version][swift-image]][swift-url]
 
