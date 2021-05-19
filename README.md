@@ -1,10 +1,8 @@
 
 # GitCommits
-> Our mobile application always you to search for a GitHub user and comb through thier repository. In the app you'll be able to get basic details about the user as well as their commit details. 
+> Our mobile iOS application allows to search for a GitHub user and comb, through thier repositories. In the app, you will be able to get basic details about the user, as well as their repository commit details. 
 
 [![Swift Version][swift-image]][swift-url]
-
-
 
 <img src ="GHCommitsHomeScreen.png">
 
@@ -18,16 +16,19 @@
 
 ## Requirements
 
-- iOS 14.4+
+- iOS 14.5+
 - Xcode 12.5
 
 ## Installation 
 
-#### Internet Connection
-Ensure you are connected to the interent [iCloud](https://support.apple.com/en-us/HT203512)
+#### Xcode 
+You will need [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12) in order to open and run the app 
+
+#### Internet Connection 
+This app relies on a stable internet connection in order to obtain a user's GitHub details 
 
 ## Model Code Snippet 
-Utilizing coding keys and Decodable to properly obtain and read the api data 
+Utilizing coding keys and Decodable to properly obtain and read the GitHub's api JSON data 
 ```swift
 
 struct Repo: Decodable {
@@ -47,7 +48,7 @@ struct Owner: Decodable {
 }
 ```
 ## URLSessions Code Snippet 
-Leveraging the Result type to handle success and faliure calls
+Leveraging the Result type allows for improved handling of success and faliure calls
 ```swift 
 
 Leveraging the power of URLSessions we can get the users commits 
@@ -55,6 +56,34 @@ func fetchRepos(for user: String, completion: @escaping (Result<[Repo], Networki
 ......
 }
 ```
+
+
+## API Call Code Snippet
+Error handling included to notify the user of an issue with their request 
+```swift 
+
+private let networkManager = NetworkManager()
+
+func fetchRepos(name: String) {
+    networkManager.fetchRepos(for: name) { [weak self]   result in
+        switch(result) {
+        case .failure(let error):
+            DispatchQueue.main.async {
+                let error =   AlertManager.presentAlertControllerWith(alertTitle: "", alertMessage: error.rawValue, dismissActionTitle: "OK")
+                self?.present(error, animated: true, completion: nil)
+            }
+            return
+        case .success(let repos):
+            self?.repos = repos
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
+    }
+}
+```
+
+
 ## Let me know what you think
 
 Ivan Ramirez – [@IvansTwitter](https://twitter.com/iramirezdev) – iramirez22ios@gmail.com
