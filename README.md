@@ -1,6 +1,6 @@
 
 # GitCommits
-> Our mobile iOS application allows to search for a GitHub user and comb, through their repositories. In the app, you will be able to get basic details about the user, as well as their repository commit details. 
+> Our mobile iOS application allows to search for a GitHub user and comb through their repositories. In the app, you will be able to get basic details about the user as well as their repository commit details. 
 
 [![Swift Version][swift-image]][swift-url]
 
@@ -51,7 +51,6 @@ struct Owner: Decodable {
 Leveraging the Result type allows for improved handling of success and faliure calls
 ```swift 
 
-Leveraging the power of URLSessions we can get the users commits 
 func fetchRepos(for user: String, completion: @escaping (Result<[Repo], NetworkingError>) -> Void) {
 ......
 }
@@ -86,7 +85,7 @@ func fetchRepos(name: String) {
 
 ## Let me know what you think
 
-Ivan Ramirez – [@IvansTwitter](https://twitter.com/iramirezdev) – iramirez22ios@gmail.com
+Ivan Ramirez – [@IvansTwitter](https://twitter.com/iramirezdev) LinkedIn [LinkedIn](https://www.linkedin.com/in/ivanframirez/) – iramirez22ios@gmail.com
 
 [swift-image]:https://img.shields.io/badge/swift-5.0-orange.svg
 [swift-url]: https://swift.org/
