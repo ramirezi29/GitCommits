@@ -10,7 +10,6 @@ import Foundation
 struct User: Decodable {
     let name: String
     let location: String
-    let bio: String
     let followers: Int
     let following: Int
 }

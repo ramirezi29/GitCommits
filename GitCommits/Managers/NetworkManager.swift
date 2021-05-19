@@ -9,7 +9,6 @@ import UIKit
 
 class NetworkManager {
     
-    static let shared = NetworkManager()
     private let baseURL = Constants.baseURL
     
     /**
@@ -157,6 +156,18 @@ class NetworkManager {
         }.resume()
     }
     
+    /**
+     This function fetches the following details from a user's GitHub account
+     - name
+     - location
+     - followers
+     - following
+     
+     ## Important Note ##
+     The user name needs to be valid
+     
+     }
+     */
     func fetchDetails(of user: String, completion: @escaping (Result<User, NetworkingError>) -> Void) {
         
         guard var url = URL(string: baseURL) else {

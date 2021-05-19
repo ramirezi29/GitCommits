@@ -8,16 +8,16 @@
 import UIKit
 
 class RepoPopOverVC: UIViewController {
-
+    
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var hashLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
-      
+    
     var repoCommit: RepoCommit?
-  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         DispatchQueue.main.async {
             self.updateTextFields()
         }

@@ -12,7 +12,6 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var avatarImage: UIImageView!
-    
     @IBOutlet weak var searchButton: UIBarButtonItem!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
@@ -20,6 +19,8 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     @IBOutlet weak var followersLabel: UILabel!
     
     private var searchAction: UIAlertAction?
+    private let networkManager = NetworkManager()
+    var userBio = ""
     
     var repos: [Repo] = []
     var user: User?
@@ -30,8 +31,8 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         tableView.dataSource = self
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.isTranslucent = true
+        avatarImageStyling()
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -40,7 +41,6 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
         }
         naviContStyling() 
         updateBio()
-        avatarImageStyling()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -72,7 +72,7 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return Constants.RepositoriesText
+        return Constants.repositoriesText
     }
     
     // MARK: - Navigation
@@ -104,9 +104,7 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     }
     
     func avatarImageStyling() {
-        avatarImage.layer.borderWidth = 1
-        avatarImage.layer.masksToBounds = false
-        avatarImage.layer.cornerRadius = avatarImage.frame.height/2
+        avatarImage.layer.cornerRadius = 10
         avatarImage.clipsToBounds = true
     }
     
@@ -117,7 +115,7 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     }
     
     func fetchRepos(name: String) {
-        NetworkManager.shared.fetchRepos(for: name) { [weak self]   result in
+        networkManager.fetchRepos(for: name) { [weak self]   result in
             switch(result) {
             case .failure(let error):
                 DispatchQueue.main.async {
@@ -127,7 +125,7 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
                 return
             case .success(let repos):
                 self?.repos = repos
-                DispatchQueue.main.async { [self] in
+                DispatchQueue.main.async {
                     self?.tableView.reloadData()
                 }
             }
@@ -135,7 +133,7 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     }
     
     func fetchUser(name: String) {
-        NetworkManager.shared.fetchDetails(of: name) { [weak self] result in
+        networkManager.fetchDetails(of: name) { [weak self] result in
             switch result {
             case .failure(_):
                 DispatchQueue.main.async {
@@ -152,7 +150,7 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UITe
     
     //NOTE - We're displaying the avator image associated with the first repository in a user's account
     func fetchAvatar() {
-        NetworkManager.shared.fetchAvatar(from: repos[0]) { [weak self] result in
+        networkManager.fetchAvatar(from: repos[0]) { [weak self] result in
             switch(result) {
             case .failure(let error):
                 print(error.localizedDescription)

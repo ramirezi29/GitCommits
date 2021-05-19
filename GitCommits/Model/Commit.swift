@@ -24,5 +24,5 @@ struct Commit: Decodable {
 struct Author: Decodable {
     let name: String
     let date: String
-    }
+}
 
