@@ -82,10 +82,11 @@ func fetchRepos(name: String) {
 }
 ```
 
-
 ## Let me know what you think
 
-Ivan Ramirez – [@IvansTwitter](https://twitter.com/iramirezdev) LinkedIn [LinkedIn](https://www.linkedin.com/in/ivanframirez/) – iramirez22ios@gmail.com
+Ivan Ramirez 
+[@IvansTwitter](https://twitter.com/iramirezdev) 
+LinkedIn [LinkedIn](https://www.linkedin.com/in/ivanframirez/) 
 
 [swift-image]:https://img.shields.io/badge/swift-5.0-orange.svg
 [swift-url]: https://swift.org/
