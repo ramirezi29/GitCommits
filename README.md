@@ -1,6 +1,6 @@
 
 # GitHub Finder
-> GitHub Finder: An iOS app to easily search GitHub users and explore their repositories. Get user details and repository commit insights on the go.
+> An iOS app to easily search GitHub users and explore their repositories. Get user details and repository commit insights on the go.
 
 [![Swift Version][swift-image]][swift-url]
 
