@@ -22,13 +22,13 @@
 ## Installation 
 
 #### Xcode 
-You will need [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12) in order to open and run the app 
+You will need [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12) to open and run the app 
 
 #### Internet Connection 
-This app relies on a stable internet connection in order to obtain a user's GitHub details 
+This app relies on a stable internet connection to obtain a user's GitHub details 
 
 ## Model Code Snippet 
-Utilizing coding keys and Decodable to properly obtain and read the GitHub's api JSON data 
+Utilizing coding keys and Decodable to obtain and read GitHub's API JSON data properly 
 ```swift
 
 struct Repo: Decodable {
@@ -58,7 +58,7 @@ func fetchRepos(for user: String, completion: @escaping (Result<[Repo], Networki
 
 
 ## API Call Code Snippet
-Error handling included to notify the user of an issue with their request 
+Error handling included notifying the user of an issue with their request 
 ```swift 
 
 private let networkManager = NetworkManager()
